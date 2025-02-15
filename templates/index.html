@@ -3,10 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>AI Startup Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        nav {
+            background: #1E1E2E;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #4ADE80;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px;
+        }
+        .startup-form, .analysis-result {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            resize: none;
+        }
+        button {
+            background: #4ADE80;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #3CCF75;
+        }
+        .match-card {
+            background: #f3f3f3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .match-card h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .redirect-slide {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Flask App</h1>
+    <nav>
+        <h1>Startup Match</h1>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Matches</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="startup-form">
+            <h2>Describe Your Startup Idea</h2>
+            <textarea id="idea" placeholder="Describe your startup..." rows="4"></textarea>
+            <button onclick="analyzeIdea()">Analyze</button>
+        </section>
+        <section class="analysis-result">
+            <h2>AI Analysis</h2>
+            <p id="employee-count">Estimated Employees: --</p>
+            <h3>Best Matches</h3>
+            <div class="matches" id="matches"></div>
+        </section>
+    </main>
+    <div class="redirect-slide">
+        <p>Redirecting to matches...</p>
+    </div>
+    <script>
+        function analyzeIdea() {
+            const idea = document.getElementById('idea').value;
+            if (!idea.trim()) {
+                alert('Please enter a startup idea.');
+                return;
+            }
+            document.getElementById('employee-count').innerText = "Estimated Employees: " + (Math.floor(Math.random() * 10) + 1);
+            document.getElementById('matches').innerHTML = "<p>Finding best matches...</p>";
+            setTimeout(() => {
+                document.getElementById('matches').innerHTML = `
+                    <div class='match-card'><h4>John Doe</h4><p>Marketing Expert</p></div>
+                    <div class='match-card'><h4>Jane Smith</h4><p>Software Engineer</p></div>
+                `;
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
